@@ -6,3 +6,5 @@ vendor/cache/*
 /log/*
 !/log/.keep
 /tmp
+
+/config/master.key
