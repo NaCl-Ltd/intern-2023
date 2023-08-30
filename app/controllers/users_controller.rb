@@ -60,6 +60,8 @@ class UsersController < ApplicationController
     render 'show_follow', status: :unprocessable_entity
   end
 
+
+
   private
 
     def user_params
