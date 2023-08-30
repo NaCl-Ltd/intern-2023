@@ -5,6 +5,12 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
+        <% if @user.introduction.present? %>
+          <section>
+            <h3>紹介文</h3>
+            <p><%= @user.introduction %></p>
+          </section>
+        <% end %>
       </h1>
     </section>
     <section class="stats">
