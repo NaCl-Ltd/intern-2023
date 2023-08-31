@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
 
+  before_action :set_user, only: %i[home new help about contact]
+
   def home
     if logged_in?
       @micropost  = current_user.microposts.build
@@ -22,4 +24,11 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
+
+  private 
+
+  def set_user
+    @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+  end
+
 end
