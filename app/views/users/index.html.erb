@@ -1,14 +1,22 @@
 <% provide(:title, 'All users') %>
 <h1>全てのユーザー</h1>
+<% if @users%>
+  <%= will_paginate %>
+<% end%>
 
-<%= will_paginate %>
 <%= form_with url:search_path, method: :post do |form| %>
   <%= form.label :query, "ユーザ検索:" %>
   <%= form.text_field :name %>
   <%= form.submit "検索" %>
 <% end %>
 <ul class="users">
+  <% if @users%>
     <%= render @users%>
+  <%else%>
+    <p style ="font-size:40px">どうやら存在しないようです...</p>
+  <% end%>
 </ul>
 
-<%= will_paginate %>
+<% if @users%>
+  <%= will_paginate %>
+<% end%>
