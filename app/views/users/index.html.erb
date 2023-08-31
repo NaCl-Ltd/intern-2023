@@ -1,5 +1,6 @@
 <% provide(:title, 'All users') %>
-<h1>全てのユーザー</h1>
+
+<h1><%= t("AllUsers") %></h1>
 <% if @users%>
   <%= will_paginate %>
 <% end%>

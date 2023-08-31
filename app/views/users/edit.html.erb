@@ -1,24 +1,28 @@
 <% provide(:title, "Edit user") %>
-<h1>プロフィールを変更</h1>
+<h1><%= t("UpdateProfile") %></h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :名前 %>
+      <%= f.label t("Name") %>
       <%= f.text_field :name, class: 'form-control' %>
 
-      <%= f.label :メールアドレス %>
+      <%= f.label t("Email") %>
       <%= f.email_field :email, class: 'form-control' %>
+      
+      <%= f.label :introduction %>
+      <%= f.text_area :introduction, class: 'form-control', rows: 5 %>
 
-      <%= f.label :パスワード%>
+
+      <%= f.label t("Passowrd")%>
       <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.label :password_confirmation, "パスワード（確認用）" %>
+      <%= f.label :password_confirmation, t("Confirmation") %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-      <%= f.submit "変更を保存", class: "btn btn-primary" %>
+      <%= f.submit t("SaveChange"), class: "btn btn-primary" %>
     <% end %>
 
     <div class="gravatar_edit">
