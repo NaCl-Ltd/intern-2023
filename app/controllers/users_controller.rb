@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(name: params[:name]).paginate(page: params[:page])
+    @users ||= User.paginate(page: params[:page])
   end
 
   def show
@@ -59,7 +60,12 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow', status: :unprocessable_entity
   end
-
+  def search
+    @data = User.where(name: params[:name])
+    p params[:name]
+    p @data
+    redirect_to users_url name:params[:name]
+  end
   private
 
     def user_params
