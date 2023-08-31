@@ -28,8 +28,9 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.find_by(id: params[:id])
     current_user.microposts.update_all(fixed: false)
     if @micropost
-      @micropost.update(fixed: true)  
-      flash[:success] = "固定しました"
+      @micropost.update(fixed: true)
+      @fixed_item = @micropost
+      flash[:success] = @fixed_item.content
       redirect_to root_url
     else
       flash[:error] = "Micropost not found."
