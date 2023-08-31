@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   end
   resources :relationships,       only: [:create, :destroy]
   get '/microposts', to: 'static_pages#home'
+  get "/new", to: "static_pages#new"
 end
