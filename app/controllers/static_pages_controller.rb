@@ -28,7 +28,9 @@ class StaticPagesController < ApplicationController
   private 
 
   def set_user
-    @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+    if logged_in?
+      @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+    end
   end
 
 end
