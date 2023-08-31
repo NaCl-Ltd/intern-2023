@@ -17,5 +17,4 @@ config/settings/*.local.yml
 config/environments/*.local.yml
 
 
-/storage/s2/ku/s2ku2bbiuad5nykv7ru21bq48beg
-/storage/w9/8s/w98s3thl3d3mnzsc595g2phh552x
+storage/
