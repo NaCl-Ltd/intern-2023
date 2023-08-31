@@ -5,7 +5,8 @@
     <p><%= user.introduction %></p>
   <% end %>
   <% if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", user, data: { "turbo-method": :delete,                                    turbo_confirm: "You sure?" } %>
+    <%= link_to t("DeletePost"), user, data: { "turbo-method": :delete,
+                                          turbo_confirm: "You sure?" } %>
   <% end %>
 
 </li>
