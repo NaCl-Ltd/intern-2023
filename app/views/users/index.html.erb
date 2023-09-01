@@ -6,6 +6,12 @@
 <%= form_with url: search_path, method: :post do |form| %>
 <%= form.label :query, t("Search") %>
 <%= form.text_field :data %>
+<label>
+ユーザー検索<%= form.radio_button :select,"ユーザー検索" ,:checked => true %>
+</label>
+<label>
+キーワード検索<%= form.radio_button :select,"キーワード検索" %>
+</label>
 <%= form.submit t("Search") %>
 <% end %>
 
