@@ -107,7 +107,11 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
-
+  
+  #名前に含まれていたらtrueを返す
+  def search(data)
+    name.include?(data)
+  end
   private
 
     # メールアドレスをすべて小文字にする

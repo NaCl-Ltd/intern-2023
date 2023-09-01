@@ -1,10 +1,19 @@
 <% provide(:title, 'All users') %>
-<h1><%= t("AllUsers") %></h1>
 
+<h1><%= t("AllUsers") %></h1>
 <%= will_paginate %>
 
-<ul class="users">
-  <%= render @users %>
-</ul>
+<%= form_with url: search_path, method: :post do |form| %>
+<%= form.label :query, t("Search") %>
+<%= form.text_field :data %>
+<%= form.submit t("Search") %>
+<% end %>
 
+<ul class="users">
+  <% if @users.present?%>
+    <%= render @users%>
+  <%else%>
+    <p style ="font-size:40px"><%=t("not exist")%></p>
+  <% end%>
+</ul>
 <%= will_paginate %>

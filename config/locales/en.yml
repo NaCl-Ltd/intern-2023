@@ -67,6 +67,8 @@ en:
   New: "NEW"
   recentMicropost: "Most recent Micropost"
   noMicropost: "No microposts :'-("
+  Search: "Search"
+  Not_exist: "Apparently it doesn't exist"
   MicropostFeed: "Micropost Feed"
   ago: " ago"
   Post2: "Post "
