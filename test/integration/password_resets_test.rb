@@ -1,4 +1,5 @@
 require "test_helper"
+require_relative "../../utility/add_query_params.rb"
 
 class PasswordResets < ActionDispatch::IntegrationTest
 
@@ -40,24 +41,24 @@ class PasswordFormTest < PasswordResetForm
     assert_not_equal @user.reset_digest, @reset_user.reset_digest
     assert_equal 1, ActionMailer::Base.deliveries.size
     assert_not flash.empty?
-    assert_redirected_to root_url
+    assert_redirected_to add_query_params(root_url)
   end
 
   test "reset with wrong email" do
     get edit_password_reset_path(@reset_user.reset_token, email: "")
-    assert_redirected_to root_url
+    assert_redirected_to add_query_params(root_url)
   end
 
   test "reset with inactive user" do
     @reset_user.toggle!(:activated)
     get edit_password_reset_path(@reset_user.reset_token,
                                  email: @reset_user.email)
-    assert_redirected_to root_url
+    assert_redirected_to add_query_params(root_url)
   end
 
   test "reset with right email but wrong token" do
     get edit_password_reset_path('wrong token', email: @reset_user.email)
-    assert_redirected_to root_url
+    assert_redirected_to add_query_params(root_url)
   end
 
   test "reset with right email and right token" do

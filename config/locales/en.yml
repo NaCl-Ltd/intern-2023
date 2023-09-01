@@ -64,5 +64,8 @@ en:
   Post: "Post"
   Unfollow: "Unfollow"
   Follow: "Follow"
+  New: "NEW"
+  recentMicropost: "Most recent Micropost"
+  noMicropost: "No microposts :'-("
   Search: "Search"
   Not_exist: "Apparently it doesn't exist"

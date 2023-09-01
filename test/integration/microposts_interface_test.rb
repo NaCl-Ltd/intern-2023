@@ -1,4 +1,5 @@
 require "test_helper"
+require_relative "../../utility/add_query_params.rb"
 
 class MicropostsInterface < ActionDispatch::IntegrationTest
 
@@ -20,7 +21,7 @@ class MicropostsInterfaceTest < MicropostsInterface
       post microposts_path, params: { micropost: { content: "" } }
     end
     assert_select 'div#error_explanation'
-    assert_select 'a[href=?]', '/?page=2'  # 正しいページネーションリンク
+    assert_select 'a[href=?]', '/?locale=en&page=2'  # 正しいページネーションリンク
   end
 
   test "should create a micropost on valid submission" do
@@ -28,7 +29,7 @@ class MicropostsInterfaceTest < MicropostsInterface
     assert_difference 'Micropost.count', 1 do
       post microposts_path, params: { micropost: { content: content } }
     end
-    assert_redirected_to root_url
+    assert_redirected_to add_query_params(root_url)
     follow_redirect!
     assert_match content, response.body
   end
