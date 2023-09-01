@@ -88,7 +88,7 @@ class UsersController < ApplicationController
   private 
 
   def set_user
-    @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).limit(10)
+    @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).limit(Settings.about.new.num)
     @new_microposts_count = @new_micropost.count
   end
 end
