@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   get '/microposts', to: 'static_pages#home'
-  get '/deleted_microposts', to: 'static_pages#deleted_post_index'
+  get '/deleted_microposts', to: 'microposts#deleted_post_index'
 end

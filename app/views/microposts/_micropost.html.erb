@@ -9,8 +9,13 @@
   </span>
   <span class="timestamp">
     <% if current_user?(micropost.user) %>
-      <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
+      <% if micropost.deleted_flag == false%>
+        <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
                                                turbo_confirm: "You sure?" } %>
+      <% else %>
+        <%= link_to t("micropost_revive"), micropost, data: { "turbo-method": :delete,
+        turbo_confirm: "You sure?" } %>
+      <% end %>
     <% end %>
   </span>
 </li>

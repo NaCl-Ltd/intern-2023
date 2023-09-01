@@ -67,3 +67,5 @@ ja:
   Post: "ポスト"
   Unfollow: "フォロー解除"
   Follow: "フォローする"
+  Deleted_micropost: "あなたが削除したマイクロポスト"
+  micropost_revive: "削除取消"

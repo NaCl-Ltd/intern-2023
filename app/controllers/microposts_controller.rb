@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:create, :destroy,:deleted_post_index]
   before_action :correct_user,   only: :destroy
 
   def create
@@ -15,15 +15,31 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    @micropost.deleted_flag = true
+    if @micropost.deleted_flag == true
+      @micropost.deleted_flag = false
+      flash_message = "Micropost revived"
+    else @micropost.deleted_flag == false
+      @micropost.deleted_flag = true
+      flash_message = "Micropost deleted"
+    end
+
+    flash[:success] = flash_message
     @micropost.save
-    flash[:success] = "Micropost deleted"
     if request.referrer.nil?
       redirect_to root_url, status: :see_other
     else
       redirect_to request.referrer, status: :see_other
     end
   end
+
+
+
+  def deleted_post_index
+    if logged_in?
+      @microposts = current_user.microposts.where(deleted_flag: true)
+    end
+  end
+  
 
   private
 

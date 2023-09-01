@@ -7,13 +7,6 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  def deleted_post_index
-    if logged_in?
-      @microposts = current_user.microposts.build
-      @feed_items = current_user.feed.paginate(page: params[:page])
-    end
-  end
-  
   def help
   end
 
