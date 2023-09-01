@@ -66,3 +66,7 @@ en:
   Follow: "Follow"
   Search: "Search"
   Not_exist: "Apparently it doesn't exist"
+  New: "NEW"
+  recentMicropost: "Most recent Micropost"
+  noMicropost: "No microposts :'-("
+

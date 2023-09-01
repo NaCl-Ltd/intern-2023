@@ -3,6 +3,7 @@ class UsersController < ApplicationController
                                         :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
+  before_action :set_user, only: %i[index show create edit update destroy following followers]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -84,4 +85,11 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_url, status: :see_other) unless current_user.admin?
     end
+
+  private 
+
+  def set_user
+    @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+  end
+
 end
