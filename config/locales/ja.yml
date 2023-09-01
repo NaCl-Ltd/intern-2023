@@ -67,5 +67,7 @@ ja:
   Post: "ポスト"
   Unfollow: "フォロー解除"
   Follow: "フォローする"
-  New: 新規にゃー
-  recentMicropost: 直近48時間以内のにゃー
+  New: "新規にゃー"
+  recentMicropost: "直近48時間以内のにゃー"
+  noMicropost: "投稿はありません｡ °(´ฅωฅ`)°｡"
+
