@@ -1,7 +1,11 @@
 about:
   internship:
     host: ネットワーク応用通信研究所
-    a: kiharu3112
-    b: mametaro99
-    c: Suzune2741
-    d: yasaino
+    students:
+      - kiharu3112
+      - mametaro99
+      - Suzune2741
+      - yasaino
+  new:
+    time: 48
+    num: 10

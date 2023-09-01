@@ -3,11 +3,14 @@ class UsersController < ApplicationController
                                         :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
+  before_action :set_user, only: %i[index show create edit update destroy following followers]
 
   def index
     @users = User.paginate(page: params[:page])
+    search_term = "%#{params[:data]}%"
+    @users = @users.where('name LIKE ?', search_term).or(@users.where('email LIKE ?', search_term))
   end
-
+  
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.where(deleted_flag: false).paginate(page: params[:page])
@@ -59,7 +62,10 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow', status: :unprocessable_entity
   end
-
+  def search
+    @data = User.where(name: params[:data])
+    redirect_to users_url data:params[:data]
+  end
   private
 
     def user_params
@@ -79,4 +85,11 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_url, status: :see_other) unless current_user.admin?
     end
+
+  private 
+
+  def set_user
+    @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+  end
+
 end

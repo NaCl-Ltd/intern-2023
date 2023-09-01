@@ -14,9 +14,8 @@
   インターンシップの中でより良いアプリケーションになるよう改善が行われております。
   この改善を実施したのは次のインターン生のみなさんです。
   <ul>
-    <li><%= Settings.about.internship.a %></li>
-    <li><%= Settings.about.internship.b %></li>
-    <li><%= Settings.about.internship.c %></li>
-    <li><%= Settings.about.internship.d %></li>
+  <% Settings.about.internship.students.each do |student_name| %>
+    <li><%= student_name %></li>
+      <% end %>
   </ul>
 </p>
