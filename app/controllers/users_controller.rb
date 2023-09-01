@@ -7,9 +7,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
-    p params[:select]
-    p params[:select] == "ユーザー検索"
-    p params[:select] == "キーワード検索"
     if params[:select] == "ユーザー検索"
     search_term = "%#{params[:data]}%"
     @users = @users.where('name LIKE ?', search_term).or(@users.where('email LIKE ?', search_term)).or(@users.where('birthplace LIKE ?', search_term))
