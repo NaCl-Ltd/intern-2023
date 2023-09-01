@@ -1,6 +1,6 @@
 <% if @feed_items.any? %>
   <ol class="microposts">
-    <% if @fixed_item %>
+    <% if @fixed_item.present? %>
       <%= render @fixed_item %>
     <% end %>
     <%= render @feed_items %>
