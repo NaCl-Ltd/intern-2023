@@ -4,15 +4,15 @@
     <section>
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>
-        <% if @user.introduction.present? %>
-          <section>
-            <h3>紹介文</h3>
-            <p><%= @user.introduction %></p>
-          </section>
-        <% end %>
+        <%= @user.name %>      
       </h1>
-    </section>
+    </section>          
+    <% if @user.introduction.present? %>
+        <h3>出身地:<%= @user.birthplace %></h3>
+    <% end %>
+    <% if @user.introduction.present? %>
+      <p><%= @user.introduction %></p>
+    <% end %>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
