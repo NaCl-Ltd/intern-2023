@@ -67,10 +67,8 @@ ja:
   Post: "ポスト"
   Unfollow: "フォロー解除"
   Follow: "フォローする"
+  Search: "検索"
+  Not_exist: "どうやら存在しないようです..."
   New: "新規にゃー"
   recentMicropost: "直近48時間以内のにゃー"
   noMicropost: "投稿はありません｡ °(´ฅωฅ`)°｡"
-
-  Search: "検索"
-  Not_exist: "どうやら存在しないようです..."
-  
