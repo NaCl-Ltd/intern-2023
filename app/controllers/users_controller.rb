@@ -5,16 +5,8 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    if params[:name] != nil
-      @users = User.where(name: params[:name])
-      if @users.size == 0
-        @users = nil
-      else
-        @users = User.where(name: params[:name]).paginate(page: params[:page])
-      end
-    else
-      @users = User.paginate(page: params[:page])
-    end
+    @users = User.paginate(page: params[:page])
+    @users.where!('name LIKE ?', "%#{params[:name]}%") if params[:name].present?
   end
   
   def show
