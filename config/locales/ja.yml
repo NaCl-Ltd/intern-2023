@@ -38,7 +38,7 @@ ja:
   Help: "ヘルプ"
   User: "ユーザー"
   Account: "アカウント"
-  Profile: "プロファイル"
+  Profile: "プロフィール"
   Setting: "設定"
   Logout: "ログアウト"
   Login: "ログイン"
@@ -72,3 +72,14 @@ ja:
   noMicropost: "投稿はありません｡ °(´ฅωฅ`)°｡"
   birthplace: "出身地"
   introduction: "自己紹介文" 
+  Search: "検索"
+  Not_exist: "どうやら存在しないようです..."
+  MicropostFeed: "マイクロポスト"
+  datetime:
+    distance_in_words:
+      x_minutes: "%{count}分"
+      about_x_hours: "%{count}時間"
+      x_days: "%{count}日"
+  ago: "前のポスト"
+  Post2: ""
+  Help: "ヘルプ"

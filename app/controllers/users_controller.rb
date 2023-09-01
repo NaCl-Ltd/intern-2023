@@ -7,8 +7,10 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
+    search_term = "%#{params[:data]}%"
+    @users = @users.where('name LIKE ?', search_term).or(@users.where('email LIKE ?', search_term))
   end
-
+  
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
@@ -60,7 +62,10 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow', status: :unprocessable_entity
   end
-
+  def search
+    @data = User.where(name: params[:data])
+    redirect_to users_url data:params[:data]
+  end
   private
 
     def user_params
