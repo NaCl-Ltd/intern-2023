@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy,:deleted_post_index]
-  before_action :correct_user,   only: :destroy
+  before_action :correct_user,   only: [:destroy, :revive]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -15,16 +15,26 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    if @micropost.deleted_flag == true
-      @micropost.deleted_flag = false
-      flash_message = "Micropost revived"
-    else @micropost.deleted_flag == false
-      @micropost.deleted_flag = true
-      flash_message = "Micropost deleted"
+    @micropost.deleted_flag = true
+    if @micropost.save
+      flash[:success] = "Micropost deleted"
+    else
+      flash[:alert] = "Revive Failed."
     end
+    if request.referrer.nil?
+      redirect_to root_url, status: :see_other
+    else
+      redirect_to request.referrer, status: :see_other
+    end
+  end
 
-    flash[:success] = flash_message
-    @micropost.save
+  def revive
+    @micropost.deleted_flag = false
+    if @micropost.save
+      flash[:success] = "Micropost revived"
+    else
+      flash[:alert] = "Revive Failed."
+    end
     if request.referrer.nil?
       redirect_to root_url, status: :see_other
     else

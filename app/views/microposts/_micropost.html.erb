@@ -14,7 +14,7 @@
         <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
                                                turbo_confirm: "You sure?" } %>
       <% else %>
-        <%= link_to t("micropost_revive"), micropost, data: { "turbo-method": :delete,
+        <%= link_to t("micropost_revive"),revive_micropost_path(micropost) , data: { "turbo-method": :POST,
         turbo_confirm: "You sure?" } %>
       <% end %>
     <% end %>

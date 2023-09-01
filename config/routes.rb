@@ -17,8 +17,13 @@ Rails.application.routes.draw do
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy]
+  resources :microposts,          only: [:create, :destroy] do
+    member do
+      post :revive
+    end
+  end
   resources :relationships,       only: [:create, :destroy]
+    
   get '/microposts', to: 'static_pages#home'
   get '/deleted_microposts', to: 'microposts#deleted_post_index'
   get "/new", to: "static_pages#new"
