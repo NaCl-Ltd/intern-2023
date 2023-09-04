@@ -4,22 +4,27 @@
     <section>
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>      
+        <%= @user.name %>
+        <% if @user.introduction.present? %>
+          <section>
+            <h3>紹介文</h3>
+            <p><%= @user.introduction %></p>
+          </section>
+        <% end %>
       </h1>
-    </section>          
-    <% if @user.introduction.present? %>
-        <h3>出身地:<%= @user.birthplace %></h3>
-    <% end %>
-    <% if @user.introduction.present? %>
-      <p><%= @user.introduction %></p>
-    <% end %>
-    <%= link_to "Like一覧", show_likes_path(id: params[:id]) %>
+    </section>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
+    <% if @fixed_item.present? %>
+      <h3>固定にゃー </h3>
+      <ol class="microposts">
+        <%= render @fixed_item %>
+      </ol>
+    <% end %>
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
       <ol class="microposts">

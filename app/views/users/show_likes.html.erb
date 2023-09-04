@@ -20,12 +20,12 @@
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
+      <% @likes = @user.like_microposts%>
     <% if @user.microposts.any? %>
-      <h3>Likes(<%= @user.microposts.count %>)</h3>
+      <h3>Likes(<%= @likes.count %>)</h3>
       <ol class="microposts">
-        <%= render @microposts %>
+        <%= render 'likes' %>
       </ol>
-      <%= will_paginate @microposts %>
     <% end %>
   </div>
 </div>
