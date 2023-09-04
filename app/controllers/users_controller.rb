@@ -71,6 +71,11 @@ class UsersController < ApplicationController
     @data = User.where(name: params[:data])
     redirect_to users_url data:params[:data],select: params[:select]
   end
+  def show_likes 
+    @user  = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
+
+  end
   private
 
     def user_params

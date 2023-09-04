@@ -13,7 +13,7 @@
     <% if @user.introduction.present? %>
       <p><%= @user.introduction %></p>
     <% end %>
-    <%= link_to "Like一覧", show_likes_path(id: params[:id]) %>
+    <%= link_to "にゃー一覧", user_path(id: params[:id]) %>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
@@ -21,7 +21,7 @@
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+      <h3>Likes(<%= @user.microposts.count %>)</h3>
       <ol class="microposts">
         <%= render @microposts %>
       </ol>
