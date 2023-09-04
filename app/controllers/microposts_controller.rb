@@ -30,7 +30,7 @@ class MicropostsController < ApplicationController
     if @micropost
       @micropost.update(fixed: true)
       @fixed_item = @micropost
-      flash[:success] = @fixed_item.content
+      flash[:success] = "固定しました"
       redirect_to root_url
     else
       flash[:error] = "Micropost not found."

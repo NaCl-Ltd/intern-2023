@@ -108,6 +108,9 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def fixed
+    Micropost.find_by(fixed: true)
+  end
   private
 
     # メールアドレスをすべて小文字にする
