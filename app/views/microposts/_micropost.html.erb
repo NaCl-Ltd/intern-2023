@@ -13,6 +13,6 @@
       <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
                                                turbo_confirm: "You sure?" } %>
     <% end %>
-    <%= link_to "マイクロポストをいいねした人の一覧", show_user_micropost_path(micropost) %>
+    <%= link_to micropost.users_like_count, show_user_micropost_path(micropost) %>
   </span>
 </li>
