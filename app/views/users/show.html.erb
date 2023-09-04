@@ -7,8 +7,8 @@
         <%= @user.name %>      
       </h1>
     </section>          
-    <% if @user.introduction.present? %>
-        <h3>出身地:<%= @user.birthplace %></h3>
+    <% if @user.birthplace.present? %>
+        <h3><%= t("birthplace")%>:<%= @user.birthplace %></h3>
     <% end %>
     <% if @user.introduction.present? %>
       <p><%= @user.introduction %></p>
