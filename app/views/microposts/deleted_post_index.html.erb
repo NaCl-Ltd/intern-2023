@@ -1,28 +1,11 @@
-<% if logged_in? %>
-  <div class="row"></div>
-    <div class="col-md-8">
+<div class="row">
+<div class="col-md-8">
       
-      <% if @microposts.any? %>
-        <h3><%= t("Deleted_micropost") %>(<%= @microposts.count %>)</h3>
-        <ol class="microposts">
-          <%= render @microposts %>
-        </ol>
-      <% end %>
-    </div>
-  </div>
-<% else %>
-  <div class="center jumbotron">
-    <h1><%= t("Welcome") %></h1>
-
-    <h2>
-      <%= t("ThisAppIS") %>
-      <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
-      <%= t("MakeBy") %>
-    </h2>
-
-    <%= link_to t("SignUpNow"), signup_path, class: "btn btn-lg btn-primary" %>
-  </div>
-
-  <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200px"),
-              "https://rubyonrails.org/" %>
-<% end %>
+  <% if @microposts.any? %>
+    <h3><%= t("Deleted_micropost") %>(<%= @microposts.count %>)</h3>
+    <ol class="microposts">
+      <%= render @microposts %>
+    </ol>
+  <% end %>
+</div>
+</div>  

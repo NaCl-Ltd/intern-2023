@@ -10,12 +10,12 @@
   <span class="timestamp">
     <%= t("Post2") %><%= time_ago_in_words(micropost.created_at) %><%= t("ago") %>
     <% if current_user?(micropost.user) %>
-      <% if micropost.deleted_flag == false%>
+      <% if micropost.deleted_flag %>
+        <%= link_to t("micropost_revive"),revive_micropost_path(micropost) , data: { "turbo-method": :POST,
+      turbo_confirm: "You sure?" } %>
+      <% else %>
         <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
                                                turbo_confirm: "You sure?" } %>
-      <% else %>
-        <%= link_to t("micropost_revive"),revive_micropost_path(micropost) , data: { "turbo-method": :POST,
-        turbo_confirm: "You sure?" } %>
       <% end %>
     <% end %>
   </span>
