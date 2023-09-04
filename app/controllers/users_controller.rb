@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     search_term = "%#{params[:data]}%"
     @users = @users.where('name LIKE ?', search_term).or(@users.where('email LIKE ?', search_term))
   end
-  
+
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
@@ -68,30 +68,30 @@ class UsersController < ApplicationController
   end
   private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation, :introduction)
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation, :introduction)
+  end
 
-    # beforeフィルタ
+  # beforeフィルタ
 
-    # 正しいユーザーかどうか確認
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url, status: :see_other) unless current_user?(@user)
-    end
+  # 正しいユーザーかどうか確認
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url, status: :see_other) unless current_user?(@user)
+  end
 
-    # 管理者かどうか確認
-    def admin_user
-      redirect_to(root_url, status: :see_other) unless current_user.admin?
-    end
-
-  private 
+  # 管理者かどうか確認
+  def admin_user
+    redirect_to(root_url, status: :see_other) unless current_user.admin?
+  end
+  private
 
   def set_user
     if current_user
       @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+      @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).limit(Settings.about.new.num)
+      @new_microposts_count = @new_micropost.count
     end
   end
-
 end
