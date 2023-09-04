@@ -12,6 +12,8 @@
     <% if current_user?(micropost.user) %>
       <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
                                                turbo_confirm: "You sure?" } %>
-    <% end %>
+    <% end %><br>
+    <%= link_to image_tag("like_cat.jpg", id: "like_cat", alt: "nomalcat", width: "30px") %>
+    
   </span>
 </li>
