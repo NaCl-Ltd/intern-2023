@@ -1,4 +1,4 @@
-<% provide(:title, 'All users') %>
+<% provide(:title, 'Users') %>
 
 <h1><%= t("AllUsers") %></h1>
 <%= will_paginate %>
@@ -7,10 +7,12 @@
 <%= form.label :query, t("Search") %>
 <%= form.text_field :data %>
 <label>
-ユーザー検索<%= form.radio_button :select,"ユーザー検索" ,:checked => true %>
+<%= t("Usersearch") %>
+<%= form.radio_button :select,"ユーザー検索" ,:checked => true %>
 </label>
 <label>
-キーワード検索<%= form.radio_button :select,"キーワード検索" %>
+<%= t("Keywordsearch")%>
+<%= form.radio_button :select,"キーワード検索" %>
 </label>
 <%= form.submit t("Search") %>
 <% end %>
@@ -19,7 +21,7 @@
   <% if @users.present?%>
     <%= render @users%>
   <%else%>
-    <p style ="font-size:40px"><%=t("not exist")%></p>
+    <p style ="font-size:40px"><%=t("Not_exist")%></p>
   <% end%>
 </ul>
 <%= will_paginate %>
