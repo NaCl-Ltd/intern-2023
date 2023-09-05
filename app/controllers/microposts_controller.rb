@@ -45,6 +45,10 @@ class MicropostsController < ApplicationController
   def count_like
     @count = Like.where(micropost_id: params[:micropost_id]).count
   end
+  
+  def count_bads
+    @bad_count = Bad.where(micropost_id: params[:micropost_id]).count
+  end
 
   def is_like
     @status = Like.find_by(user_id: current_user.id, micropost_id: params[:micropost_id]).nil?

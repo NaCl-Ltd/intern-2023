@@ -14,7 +14,8 @@
       <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
                                                       turbo_confirm: "You sure?" } %>
     <% end %>
-    <%= link_to micropost.users_like_count, show_user_micropost_path(micropost) %>
+    <%= "likes:"%><%= link_to micropost.users_like_count, show_user_micropost_path(micropost) %>
+    <%= "Bads:"%><%=  micropost.users_bad_count%>
   </span>
   </div>
   <div>
