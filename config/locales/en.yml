@@ -64,6 +64,8 @@ en:
   Post: "Post"
   Unfollow: "Unfollow"
   Follow: "Follow"
+  Deleted_micropost: "Deleted_micropost"
+  micropost_revive: "revive this micropost"
   New: "NEW"
   recentMicropost: "Most recent Micropost"
   noMicropost: "No microposts :'-("

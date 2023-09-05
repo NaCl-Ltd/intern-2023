@@ -1,6 +1,7 @@
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user, only: :destroy
+
+  before_action :logged_in_user, only: [:create, :destroy,:deleted_post_index]
+  before_action :correct_user,   only: [:destroy, :revive]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -23,8 +24,12 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    @micropost.destroy
-    flash[:success] = "Micropost deleted"
+    @micropost.deleted_flag = true
+    if @micropost.save
+      flash[:success] = "Micropost deleted"
+    else
+      flash[:alert] = "Revive Failed."
+    end
     if request.referrer.nil?
       redirect_to root_url, status: :see_other
     else
@@ -32,6 +37,26 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def revive
+    @micropost.deleted_flag = false
+    if @micropost.save
+      flash[:success] = "Micropost revived"
+    else
+      flash[:alert] = "Revive Failed."
+    end
+    if request.referrer.nil?
+      redirect_to root_url, status: :see_other
+    else
+      redirect_to request.referrer, status: :see_other
+    end
+  end
+
+
+
+  def deleted_post_index
+    @microposts = current_user.microposts.where(deleted_flag: true)
+  end
+  
   def show_user
     @likes = Like.where(micropost_id: params[:id])
     # @likesの中からuser_idを取得して配列にし、ユニークな値だけを取得して@usersに代入
