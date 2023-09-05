@@ -27,9 +27,9 @@
   </span>
   <span class="bad-icon">
     <% if micropost.is_bad(current_user.id) %>
-      <%= link_to image_tag('unlike.jpg', size: "50x50"), bads_create_path(id: micropost.id) %>
+      <%= link_to image_tag('not_bad_fish.jpg', size: "50x50"), bads_create_path(id: micropost.id) %>
     <% else %>
-      <%= link_to image_tag('like.jpg', size: "50x50"), bads_destroy_path(id: micropost.id) %>
+      <%= link_to image_tag('bad_fish.jpg', size: "50x50"), bads_destroy_path(id: micropost.id) %>
     <% end %>
   </span>
   </div>
