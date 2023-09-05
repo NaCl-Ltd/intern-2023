@@ -1,7 +1,9 @@
 class Micropost < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
+  has_many :bads, dependent: :destroy
   has_many :like_users, through: :likes,source: :user
+  has_many :bad_users, through: :bads, source: :bad
   has_one_attached :image do |attachable|
     attachable.variant :display, resize_to_limit: [300, 300]
   end

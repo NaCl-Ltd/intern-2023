@@ -323,7 +323,11 @@ span.image {
   }
 }
 
-
 .aside_green{
   background-color:yellow;
+.introduction{
+  max-height: 10em;
+  width:20em;
+  word-wrap: break-word;
+  margin-bottom: 10px;
 }

@@ -87,4 +87,5 @@ ja:
       x_days: "%{count}日"
   ago: "前のにゃー"
   Post2: ""
-
+  Usersearch: "ユーザー検索"
+  Keywordsearch: "キーワード検索"
