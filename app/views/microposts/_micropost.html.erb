@@ -1,13 +1,14 @@
 <li id="micropost-<%= micropost.id %>">
-  <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
-  <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-  <span class="content">
+  <div class="contents">
+    <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+    <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+    <span class="content">
     <%= linkify_urls(micropost.content) %>
-    <% if micropost.image.attached? %>
+      <% if micropost.image.attached? %>
       <%= image_tag micropost.image.variant(:display) %>
     <% end %>
   </span>
-  <span class="timestamp">
+    <span class="timestamp">
     <%= t("Post2") %><%= time_ago_in_words(micropost.created_at) %><%= t("ago") %>
     <% if current_user?(micropost.user) %>
       <% if micropost.deleted_flag %>
@@ -18,5 +19,16 @@
                                                turbo_confirm: "You sure?" } %>
       <% end %>
     <% end %>
+    <%= link_to micropost.users_like_count, show_user_micropost_path(micropost) %>
   </span>
+  </div>
+  <div>
+  <span class="like-icon">
+    <% if micropost.is_like(current_user.id) %>
+      <%= link_to image_tag('unlike.jpg', size: "50x50"), likes_create_path(id: micropost.id) %>
+    <% else %>
+      <%= link_to image_tag('like.jpg', size: "50x50"), likes_delete_path(id: micropost.id) %>
+    <% end %>
+  </span>
+  </div>
 </li>

@@ -7,10 +7,18 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
-    search_term = "%#{params[:data]}%"
-    @users = @users.where('name LIKE ?', search_term).or(@users.where('email LIKE ?', search_term))
+    if params[:select] == "ユーザー検索"
+      search_term = "%#{params[:data]}%"
+      @users = @users.
+                        where('name LIKE ?', search_term).
+                        or(@users.where('email LIKE ?', search_term)).
+                        or(@users.where('birthplace LIKE ?', search_term))
+    elsif params[:select] == "キーワード検索"
+      search_term = "%#{params[:data]}%"
+      @users = @users.where('introduction LIKE ?', search_term)
+    end
   end
-  
+
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.where(deleted_flag: false).paginate(page: params[:page])
@@ -64,32 +72,39 @@ class UsersController < ApplicationController
   end
   def search
     @data = User.where(name: params[:data])
-    redirect_to users_url data:params[:data]
+    redirect_to users_url data:params[:data],select: params[:select]
+  end
+  def show_likes 
+    @user  = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
+
   end
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation, :introduction)
+                                   :password_confirmation, :birthplace,:introduction)
     end
 
-    # beforeフィルタ
+  # beforeフィルタ
 
-    # 正しいユーザーかどうか確認
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url, status: :see_other) unless current_user?(@user)
-    end
-
-    # 管理者かどうか確認
-    def admin_user
-      redirect_to(root_url, status: :see_other) unless current_user.admin?
-    end
-
-  private 
-
-  def set_user
-    @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+  # 正しいユーザーかどうか確認
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url, status: :see_other) unless current_user?(@user)
   end
 
+  # 管理者かどうか確認
+  def admin_user
+    redirect_to(root_url, status: :see_other) unless current_user.admin?
+  end
+  private
+
+  def set_user
+    if current_user
+      @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+      @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).limit(Settings.about.new.num)
+      @new_microposts_count = @new_micropost.count
+    end
+  end
 end

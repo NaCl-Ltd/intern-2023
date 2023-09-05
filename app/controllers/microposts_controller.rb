@@ -50,15 +50,30 @@ class MicropostsController < ApplicationController
     end
   end
   
+  def show_user
+    @likes = Like.where(micropost_id: params[:id])
+    # @likesの中からuser_idを取得して配列にし、ユニークな値だけを取得して@usersに代入
+    @users = User.where(id: @likes.pluck(:user_id).uniq)
+  end
+
 
   private
 
-    def micropost_params
-      params.require(:micropost).permit(:content, :image)
-    end
+  def micropost_params
+    params.require(:micropost).permit(:content, :image)
+  end
 
-    def correct_user
-      @micropost = current_user.microposts.find_by(id: params[:id])
-      redirect_to root_url, status: :see_other if @micropost.nil?
-    end
+  def correct_user
+    @micropost = current_user.microposts.find_by(id: params[:id])
+    redirect_to root_url, status: :see_other if @micropost.nil?
+  end
+
+  def count_like
+    @count = Like.where(micropost_id: params[:micropost_id]).count
+  end
+
+  def is_like
+    @status = Like.find_by(user_id: current_user.id, micropost_id: params[:micropost_id]).nil?
+  end
+
 end

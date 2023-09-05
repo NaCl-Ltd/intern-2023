@@ -69,10 +69,13 @@ en:
   New: "NEW"
   recentMicropost: "Most recent Micropost"
   noMicropost: "No microposts :'-("
+  birthplace: "bitrhplace"
+  introduction: "introduction" 
   Search: "Search"
   Not_exist: "Apparently it doesn't exist"
   MicropostFeed: "Micropost Feed"
   ago: " ago"
   Post2: "Post "
   Help: "Help"
-
+  Usersearch: User search
+  Keywordsearch: "Keyword search"
