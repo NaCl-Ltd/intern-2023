@@ -5,13 +5,14 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
-        <% if @user.introduction.present? %>
-          <section>
-            <h3>紹介文</h3>
-            <p><%= @user.introduction %></p>
-          </section>
-        <% end %>
       </h1>
+      <% if @user.birthplace.present? %>
+        <h3>出身地:<%= @user.birthplace %></h3>
+      <% end %><br>
+      <% if @user.introduction.present? %>
+        <p><%= @user.introduction %></p>
+      <% end %>
+      <%= link_to "Like", show_likes_path(id: params[:id]),class: 'btn btn-default' %>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
