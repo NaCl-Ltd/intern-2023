@@ -11,4 +11,7 @@ class Micropost < ApplicationRecord
                                       message: "must be a valid image format" },
                       size:         { less_than: 5.megabytes,
                                       message:   "should be less than 5MB" }
+  def is_like(current_user_id)
+    @status = Like.find_by(user_id: current_user_id, micropost_id: id).nil?
+  end
 end
