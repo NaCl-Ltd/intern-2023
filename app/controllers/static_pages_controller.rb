@@ -13,7 +13,7 @@ class StaticPagesController < ApplicationController
   def new
     if logged_in?
       @micropost  = current_user.microposts.build
-      @feed_items = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).paginate(page: params[:page],per_page: Settings.about.new.num)
+      @feed_items = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).limit(Settings.about.new.num)
     end
   end
 
@@ -30,7 +30,8 @@ class StaticPagesController < ApplicationController
 
   def set_user
     if logged_in?
-      @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+      @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).limit(Settings.about.new.num)
+      @new_microposts_count = @new_micropost.count
     end
   end
 

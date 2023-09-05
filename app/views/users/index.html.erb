@@ -1,10 +1,27 @@
-<% provide(:title, 'All users') %>
-<h1><%= t("AllUsers") %></h1>
+<% provide(:title, 'Users') %>
 
+<h1><%= t("AllUsers") %></h1>
 <%= will_paginate %>
 
-<ul class="users">
-  <%= render @users %>
-</ul>
+<%= form_with url: search_path, method: :post do |form| %>
+<%= form.label :query, t("Search") %>
+<%= form.text_field :data %>
+<label>
+<%= t("Usersearch") %>
+<%= form.radio_button :select,"ユーザー検索" ,:checked => true %>
+</label>
+<label>
+<%= t("Keywordsearch")%>
+<%= form.radio_button :select,"キーワード検索" %>
+</label>
+<%= form.submit t("Search") %>
+<% end %>
 
+<ul class="users">
+  <% if @users.present?%>
+    <%= render @users%>
+  <%else%>
+    <p style ="font-size:40px"><%=t("Not_exist")%></p>
+  <% end%>
+</ul>
 <%= will_paginate %>

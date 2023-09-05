@@ -17,7 +17,7 @@
           class="nav navbar-nav navbar-right">
         <li><%= link_to t("Home"), root_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "NEW (#{@new_micropost})", new_path %></li>
+          <li><%= link_to "#{t("New")} (#{@new_microposts_count})", new_path %></li>
         <% end %>
         <li><%= link_to t("Help"), help_path %></li>
         <% if logged_in? %>

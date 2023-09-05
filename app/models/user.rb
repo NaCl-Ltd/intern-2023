@@ -1,5 +1,7 @@
 class User < ApplicationRecord
+  has_many :likes
   has_many :microposts, dependent: :destroy
+  has_many :like_microposts,through: :likes,source: :micropost
   has_many :active_relationships,  class_name:  "Relationship",
                                    foreign_key: "follower_id",
                                    dependent:   :destroy
@@ -107,9 +109,13 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
-
+  
   def fixed
     Micropost.find_by(fixed: true)
+  end
+  #名前に含まれていたらtrueを返す
+  def search(data)
+    name.include?(data)
   end
   private
 

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'likes/create'
+  get 'likes/delete'
   get 'password_resets/new'
   get 'password_resets/edit'
   root   "static_pages#home"
@@ -9,6 +11,8 @@ Rails.application.routes.draw do
   get    "/login",   to: "sessions#new"
   post   "/login",   to: "sessions#create"
   delete "/logout",  to: "sessions#destroy"
+  post   "/search",  to: "users#search"
+  get   "/show_likes",    to: "users#show_likes"
   resources :users do
     member do
       get :following, :followers
@@ -18,7 +22,7 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy] do 
     member do 
-      get :fixed
+      get :show_user,fixed
     end
   end
   resources :relationships,       only: [:create, :destroy]

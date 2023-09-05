@@ -4,34 +4,28 @@
     <section>
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
+        <%= @user.name %>      
+      </h1>       
       <% if @user.birthplace.present? %>
         <h3>出身地:<%= @user.birthplace %></h3>
       <% end %><br>
       <% if @user.introduction.present? %>
         <p><%= @user.introduction %></p>
       <% end %>
-      <%= link_to "Like", show_likes_path(id: params[:id]),class: 'btn btn-default' %>
     </section>
+    <%= link_to t("MicropostFeed"), user_path(id: params[:id]),class: 'btn btn-default'  %>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
-    <% if @fixed_item.present? %>
-      <h3>固定にゃー </h3>
-      <ol class="microposts">
-        <%= render @fixed_item %>
-      </ol>
-    <% end %>
+      <% @likes = @user.like_microposts%>
     <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+      <h3>Likes(<%= @likes.count %>)</h3>
       <ol class="microposts">
-        <%= render @microposts %>
+        <%= render 'likes' %>
       </ol>
-      <%= will_paginate @microposts %>
     <% end %>
   </div>
 </div>

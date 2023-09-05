@@ -1,4 +1,5 @@
 require "test_helper"
+require_relative "../../utility/add_query_params.rb"
 
 class MicropostsControllerTest < ActionDispatch::IntegrationTest
 
@@ -10,7 +11,7 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Micropost.count' do
       post microposts_path, params: { micropost: { content: "Lorem ipsum" } }
     end
-    assert_redirected_to login_url
+    assert_redirected_to add_query_params(login_url)
   end
 
   test "should redirect destroy when not logged in" do
@@ -18,7 +19,7 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
       delete micropost_path(@micropost)
     end
     assert_response :see_other
-    assert_redirected_to login_url
+    assert_redirected_to add_query_params(login_url)
   end
 
   test "should redirect destroy for wrong micropost" do
@@ -28,6 +29,6 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
       delete micropost_path(micropost)
     end
     assert_response :see_other
-    assert_redirected_to root_url
+    assert_redirected_to add_query_params(root_url)
   end
 end

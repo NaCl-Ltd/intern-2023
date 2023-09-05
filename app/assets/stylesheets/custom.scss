@@ -268,6 +268,9 @@ input {
     overflow: auto;
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
+    a {
+      margin-left: 3px;
+    }
   }
 }
 
@@ -277,6 +280,8 @@ input {
   list-style: none;
   padding: 0;
   li {
+    display: flex;
+    justify-content: space-between;
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
   }
