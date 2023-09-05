@@ -6,6 +6,9 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <h2 style="font-size: 14px; text-align: left; line-height: 0;">
+        &nbsp;<%= "@" + @user.nickname %>
+      </h2>
     </section>    
     <% if @user.birthplace.present? %>
         <p><%= @user.birthplace %></p>
