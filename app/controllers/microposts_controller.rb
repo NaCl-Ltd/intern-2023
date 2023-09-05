@@ -45,9 +45,7 @@ class MicropostsController < ApplicationController
 
 
   def deleted_post_index
-    if logged_in?
-      @microposts = current_user.microposts.where(deleted_flag: true)
-    end
+    @microposts = current_user.microposts.where(deleted_flag: true)
   end
   
   def show_user
