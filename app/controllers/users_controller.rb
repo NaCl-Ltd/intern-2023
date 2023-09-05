@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[index show create edit update destroy following followers]
 
   def index
+
     @users = User.paginate(page: params[:page])
     if params[:select] == "ユーザー検索"
       search_term = "%#{params[:data]}%"
@@ -14,14 +15,17 @@ class UsersController < ApplicationController
                         or(@users.where('email LIKE ?', search_term)).
                         or(@users.where('birthplace LIKE ?', search_term))
     elsif params[:select] == "キーワード検索"
-      search_term = "%#{params[:data]}%"
-      @users = @users.where('introduction LIKE ?', search_term)
+      ##入力が空白だったら何もしない
+      if params[:data] != ""
+        search_term = "%#{User.sanitize_sql_like(params[:data])}%"
+        @users = @users.where('introduction LIKE ?', search_term)
+      end
     end
   end
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    @microposts = @user.microposts.where(deleted_flag: false).paginate(page: params[:page])
   end
 
   def new
@@ -81,10 +85,11 @@ class UsersController < ApplicationController
   end
   private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation, :birthplace,:introduction)
-    end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation, :birthplace,:introduction)
+  end
 
   # beforeフィルタ
 

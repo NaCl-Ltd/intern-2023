@@ -10,6 +10,7 @@
       <section class="micropost_form">
         <%= render 'shared/micropost_form' %>
       </section>
+      <%= link_to t("Deleted_micropost"), deleted_microposts_path %>
     </aside>
     <div class="col-md-8">
       <% if @fixed_item.present? %>

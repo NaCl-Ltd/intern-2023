@@ -23,9 +23,12 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy] do 
     member do 
       get :show_user,:fixed
+      post :revive
     end
   end
   resources :relationships,       only: [:create, :destroy]
+    
   get '/microposts', to: 'static_pages#home'
+  get '/deleted_microposts', to: 'microposts#deleted_post_index'
   get "/new", to: "static_pages#new"
 end

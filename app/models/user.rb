@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_many :likes
+  has_many :bads
   has_many :microposts, dependent: :destroy
   has_many :like_microposts,through: :likes,source: :micropost
+  has_many :bad_microposts,through: :bads, source: :micropost
   has_many :active_relationships,  class_name:  "Relationship",
                                    foreign_key: "follower_id",
                                    dependent:   :destroy
@@ -20,7 +22,8 @@ class User < ApplicationRecord
                     uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-
+  validates_length_of :birthplace, maximum: 10
+  validates_length_of :introduction, maximum: 100
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -91,7 +94,8 @@ class User < ApplicationRecord
     following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
-                     OR user_id = :user_id", user_id: id)
+                     OR user_id = :user_id
+                     AND deleted_flag = false", user_id: id)
              .includes(:user, image_attachment: :blob)
   end
 

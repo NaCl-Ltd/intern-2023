@@ -1,0 +1,11 @@
+<div class="row">
+<div class="col-md-8">
+      
+  <% if @microposts.any? %>
+    <h3><%= t("Deleted_micropost") %>(<%= @microposts.count %>)</h3>
+    <ol class="microposts">
+      <%= render @microposts %>
+    </ol>
+  <% end %>
+</div>
+</div>  

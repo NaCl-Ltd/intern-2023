@@ -13,6 +13,3 @@
  *= require_tree .
  *= require_self
  */
-.aside_green{
-    background-color:green;
-}
