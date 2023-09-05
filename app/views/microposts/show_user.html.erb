@@ -1,0 +1,7 @@
+<ul class="users">
+  <% if @users.present?%>
+    <%= render @users%>
+  <%else%>
+    <p style ="font-size:40px"><%=t("not exist")%></p>
+  <% end%>
+</ul>  

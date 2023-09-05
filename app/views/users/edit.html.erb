@@ -11,10 +11,12 @@
 
       <%= f.label t("Email") %>
       <%= f.email_field :email, class: 'form-control' %>
-      
-      <%= f.label :introduction %>
-      <%= f.text_area :introduction, class: 'form-control', rows: 5 %>
 
+      <%= f.label t("birthplace") %>
+      <%= f.text_field :birthplace, class: 'form-control'%>
+
+      <%= f.label t("introduction") %>
+      <%= f.text_area :introduction, class: 'form-control', rows: 5 %>
 
       <%= f.label t("Passowrd")%>
       <%= f.password_field :password, class: 'form-control' %>
