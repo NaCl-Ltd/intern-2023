@@ -1,0 +1,3 @@
+<% @likes.each do |like_post|%>
+    <%= render partial: 'microposts/micropost',locals: {micropost: like_post} %>
+<% end %>
