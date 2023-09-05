@@ -5,8 +5,10 @@
     <%= link_to "@#{micropost.user.nickname}", micropost.user, class: "user" %>
     <span class="content">
     <%= linkify_urls(micropost.content) %>
-      <% if micropost.image.attached? %>
-      <%= image_tag micropost.image.variant(:display) %>
+    <% if micropost.images.attached? %>
+      <% micropost.images.each do |image| %>
+        <%= image_tag image.variant(:display) %>
+      <% end %>
     <% end %>
   </span>
     <span class="timestamp">
