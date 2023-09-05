@@ -1,5 +1,6 @@
 <% if @feed_items.any? %>
   <ol class="microposts">
+    <%=p @microposts%>
     <%= render @fixed_item %>
   </ol>
 <% end %>

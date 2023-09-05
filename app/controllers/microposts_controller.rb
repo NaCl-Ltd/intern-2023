@@ -30,8 +30,8 @@ class MicropostsController < ApplicationController
     @users = User.where(id: @likes.pluck(:user_id).uniq)
   end
   def fixed
-    @micropost = current_user.microposts.find_by(id: params[:id])
     current_user.microposts.update_all(fixed: false)
+    @micropost = current_user.microposts.find_by(id: params[:id])
     if @micropost
       @micropost.update(fixed: true)
       @fixed_item = @micropost
