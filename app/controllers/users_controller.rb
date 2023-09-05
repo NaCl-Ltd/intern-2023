@@ -8,8 +8,11 @@ class UsersController < ApplicationController
   def index
     @users = User.paginate(page: params[:page])
     if params[:select] == "ユーザー検索"
-    search_term = "%#{User.sanitize_sql_like(params[:data])}%"
-    @users = @users.where('name LIKE ?', search_term).or(@users.where('email LIKE ?', search_term)).or(@users.where('birthplace LIKE ?', search_term))
+      search_term = "%#{params[:data]}%"
+      @users = @users.
+                        where('name LIKE ?', search_term).
+                        or(@users.where('email LIKE ?', search_term)).
+                        or(@users.where('birthplace LIKE ?', search_term))
     elsif params[:select] == "キーワード検索"
       search_term = "%#{User.sanitize_sql_like(params[:data])}%"
       @users = @users.where('introduction LIKE ?', search_term)
@@ -70,6 +73,11 @@ class UsersController < ApplicationController
   def search
     @data = User.where(name: params[:data])
     redirect_to users_url data:params[:data],select: params[:select]
+  end
+  def show_likes 
+    @user  = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
+
   end
   private
 

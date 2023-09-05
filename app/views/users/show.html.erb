@@ -6,14 +6,14 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-      <% if @user.birthplace.present? %>
-        <h3>出身地:<%= @user.birthplace %></h3>
-      <% end %><br>
-      <% if @user.introduction.present? %>
-        <p><%= @user.introduction %></p>
-      <% end %>
-      <%= link_to "Like", show_likes_path(id: params[:id]),class: 'btn btn-default' %>
-    </section>
+    </section>          
+    <% if @user.birthplace.present? %>
+        <p><%= @user.birthplace %></p>
+    <% end %>
+    <% if @user.introduction.present? %>
+      <p><%= @user.introduction %></p>
+    <% end %>
+    
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>

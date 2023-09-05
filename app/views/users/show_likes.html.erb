@@ -1,0 +1,31 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>      
+      </h1>       
+      <% if @user.birthplace.present? %>
+        <h3>出身地:<%= @user.birthplace %></h3>
+      <% end %><br>
+      <% if @user.introduction.present? %>
+        <p><%= @user.introduction %></p>
+      <% end %>
+    </section>
+    <%= link_to t("MicropostFeed"), user_path(id: params[:id]),class: 'btn btn-default'  %>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <%= render 'follow_form' if logged_in? %>
+      <% @likes = @user.like_microposts%>
+    <% if @user.microposts.any? %>
+      <h3>Likes(<%= @likes.count %>)</h3>
+      <ol class="microposts">
+        <%= render 'likes' %>
+      </ol>
+    <% end %>
+  </div>
+</div>
