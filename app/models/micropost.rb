@@ -1,7 +1,7 @@
 class Micropost < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
-  had_many :bads, dependent: :destroy
+  has_many :bads, dependent: :destroy
   has_many :like_users, through: :likes,source: :user
   has_many :bad_users, through: :bads, source: :bad
   has_one_attached :image do |attachable|
@@ -19,6 +19,9 @@ class Micropost < ApplicationRecord
     @status = Like.find_by(user_id: current_user_id, micropost_id: id).nil?
   end
 
+  def is_bad(current_user_id)
+    @status = Bad.find_by(user_id: current_user_id, micropost_id: id).nil?
+  end
 
   def users_like_count
     @likes = Like.where(micropost_id: id)
