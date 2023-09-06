@@ -2,6 +2,7 @@
   <div class="contents">
     <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
     <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+    <%= link_to "@#{micropost.user.nickname}", micropost.user, class: "user" %>
     <span class="content">
     <%= linkify_urls(micropost.content) %>
       <% if micropost.image.attached? %>
