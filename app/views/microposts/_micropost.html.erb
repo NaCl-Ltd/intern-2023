@@ -18,8 +18,13 @@
       <% else %>
         <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
                                                turbo_confirm: "You sure?" } %>
-        <%= link_to "固定する", fixed_micropost_path(micropost), data: { "turbo-method": :get,
-                                               turbo_confirm: "固定しますか?" } %>
+        <% if micropost.fixed%>
+          <%= link_to t("Unpin"), unpin_micropost_path(micropost), data: { "turbo-method": :get,
+                                                turbo_confirm: "You sure?" } %>
+        <% else%>
+          <%= link_to t("Fix"), fixed_micropost_path(micropost), data: { "turbo-method": :get,
+                                                turbo_confirm: "You sure?" } %>
+        <% end %>
       <% end %>
 
     <% end %>
