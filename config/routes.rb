@@ -34,4 +34,5 @@ Rails.application.routes.draw do
   get '/microposts', to: 'static_pages#home'
   get '/deleted_microposts', to: 'microposts#deleted_post_index'
   get "/new", to: "static_pages#new"
+  get "/ranking", to: "static_pages#ranking"
 end

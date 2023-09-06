@@ -11,4 +11,8 @@ class LikesController < ApplicationController
     end
     redirect_to request.referrer
   end
+  def sort_likes 
+    @sort_likes = Like.where(micropost_id: params[:micropost_id]).count.sort
+    p sort_likes
+  end
 end
