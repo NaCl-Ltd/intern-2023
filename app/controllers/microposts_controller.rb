@@ -54,6 +54,11 @@ class MicropostsController < ApplicationController
     @users = User.where(id: @likes.pluck(:user_id).uniq)
   end
 
+  def bad_user
+    @bads = Bad.where(micropost_id: params[:id])
+    @bad_users = User.where(id: @bads.pluck(:user_id).uniq)
+  end
+
 
   private
 
