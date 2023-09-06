@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy]  do
     member do
       get :show_user
+      get :bad_user
       post :revive
     end
   end
