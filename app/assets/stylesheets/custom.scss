@@ -307,6 +307,20 @@ input {
     margin-right: 10px;
     margin-top: 5px;
   }
+  .reaction-group {
+    display: flex;
+    :first-child {
+      margin-right: 12px;
+    }
+    .reaction {
+      display: flex;
+      flex-direction: column;
+      width: 50px;
+      .count {
+        margin: 0 auto;
+      }
+    }
+  }
 }
 
 aside {
