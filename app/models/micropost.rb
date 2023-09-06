@@ -19,6 +19,9 @@ class Micropost < ApplicationRecord
     @status = Like.find_by(user_id: current_user_id, micropost_id: id).nil?
   end
 
+  def is_bad(current_user_id)
+    @status = Bad.find_by(user_id: current_user_id, micropost_id: id).nil?
+  end
 
   def users_like_count
     @likes = Like.where(micropost_id: id)
