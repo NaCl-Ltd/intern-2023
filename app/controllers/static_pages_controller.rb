@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
     if logged_in?
       @micropost = current_user.microposts.build
       @feed_items = current_user.feed.paginate(page: params[:page])
-      @fixed_item= current_user.microposts.where(fixed: :true)
+      @fixed_item = current_user.microposts.where(fixed: :true)
     end
   end
 

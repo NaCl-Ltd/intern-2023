@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy,:deleted_post_index,:fixed]
-  before_action :correct_user,   only: [[:destroy, :revive]]
+  before_action :correct_user,   only: [:destroy, :revive]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -16,6 +16,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.deleted_flag = true
+    @micropost.fixed = false
     if @micropost.save
       flash[:success] = "Micropost deleted"
     else
@@ -56,14 +57,14 @@ class MicropostsController < ApplicationController
   def fixed
     current_user.microposts.update_all(fixed: false)
     @micropost = current_user.microposts.find_by(id: params[:id])
-    if @micropost
+    if @micropost && !(@micropost.deleted_flag)
       @micropost.update(fixed: true)
       @fixed_item = @micropost
       flash[:success] = "固定しました"
-      redirect_to root_url
+      redirect_to request.referer
     else
       flash[:error] = "Micropost not found."
-      redirect_to root_url
+      redirect_to request.referer
     end
   end
 
