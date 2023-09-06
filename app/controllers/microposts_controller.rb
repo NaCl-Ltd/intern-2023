@@ -15,6 +15,7 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
+    @micropost.likes.destroy_all
     @micropost.deleted_flag = true
     if @micropost.save
       flash[:success] = "Micropost deleted"
