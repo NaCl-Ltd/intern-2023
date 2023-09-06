@@ -277,6 +277,7 @@ input {
 /* microposts */
 
 .microposts {
+  margin: 0 auto;
   list-style: none;
   padding: 0;
   li {
@@ -358,4 +359,9 @@ span.image {
       border-radius: 4px;
     }
   }
+}
+
+/* new */
+.new {
+  width: 100%;
 }
