@@ -5,7 +5,10 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>      
-      </h1>       
+      </h1>     
+      <h2 style="font-size: 14px; text-align: left; line-height: 0;">
+        &nbsp;<%= @user.nickname %>
+      </h2>  
       <% if @user.birthplace.present? %>
         <h3>出身地:<%= @user.birthplace %></h3>
       <% end %><br>
