@@ -1,7 +1,6 @@
 class LikesController < ApplicationController
   def create
     Like.create(user_id: current_user.id, micropost_id: params[:id])
-    Logger.new("log/create.txt").debug(params[:id])
     redirect_to request.referrer
   end
 
@@ -12,7 +11,7 @@ class LikesController < ApplicationController
     redirect_to request.referrer
   end
   def sort_likes 
-    @sort_likes = Like.where(micropost_id: params[:micropost_id]).count.sort
-    p sort_likes
+    @sorted_likes = Like.group(:micropost_id).count.sort_by { |_, count| -count } 
+    redirect_to request.referrer
   end
 end

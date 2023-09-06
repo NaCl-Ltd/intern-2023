@@ -1,6 +1,6 @@
-<% if @sort_likes %>
-  <ol class="microposts">
-    <%= render @sort_likes %>
-  </ol>
-  
+<ol class="microposts">
+<% @sorted_likes.each do |like_post|%>
+    <% ranking_post = Micropost.find_by(id: like_post[0])%>
+    <%= render partial: 'microposts/micropost',locals: {micropost: ranking_post} %>
 <% end %>
+</ol>
