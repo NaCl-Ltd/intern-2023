@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'bads/create'
+  get 'bads/destroy'
   get 'likes/create'
   get 'likes/delete'
   get 'password_resets/new'
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy] do 
     member do 
-      get :show_user,:fixed
+      get :show_user , :fixed , :bad_user
       post :revive
     end
   end

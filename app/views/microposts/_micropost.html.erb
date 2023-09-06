@@ -2,6 +2,7 @@
   <div class="contents">
     <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
     <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+    <%= link_to "@#{micropost.user.nickname}", micropost.user, class: "user" %>
     <span class="content">
     <%= linkify_urls(micropost.content) %>
       <% if micropost.image.attached? %>
@@ -23,6 +24,7 @@
 
     <% end %>
     <%= link_to micropost.users_like_count, show_user_micropost_path(micropost) %>
+    <%= link_to micropost.users_bad_count, bad_user_micropost_path(micropost) %>
   </span>
   </div>
   <div>
@@ -31,6 +33,13 @@
       <%= link_to image_tag('unlike.jpg', size: "50x50"), likes_create_path(id: micropost.id) %>
     <% else %>
       <%= link_to image_tag('like.jpg', size: "50x50"), likes_delete_path(id: micropost.id) %>
+    <% end %>
+  </span>
+  <span class="bad-icon">
+    <% if micropost.is_bad(current_user.id) %>
+      <%= link_to image_tag('not_bad_fish.jpg', size: "50x50"), bads_create_path(id: micropost.id) %>
+    <% else %>
+      <%= link_to image_tag('bad_fish.jpg', size: "50x50"), bads_destroy_path(id: micropost.id) %>
     <% end %>
   </span>
   </div>
