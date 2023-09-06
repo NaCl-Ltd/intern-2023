@@ -332,3 +332,30 @@ span.image {
   word-wrap: break-word;
   margin-bottom: 10px;
 }
+
+
+/* フォームのスタイリング */
+.form-wrapper {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7); /* 薄暗い背景 */
+  padding: 20px;
+  z-index: 9999; /* 他の要素より上に表示 */
+  max-width: 400px; /* フォームの最大幅 */
+}
+
+.form-wrapper textarea {
+  width: 100%;
+  height: 100px;
+  resize: vertical;
+}
+
+.form-wrapper .btn-primary {
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

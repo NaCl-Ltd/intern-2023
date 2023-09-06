@@ -5,14 +5,15 @@ class StaticPagesController < ApplicationController
 
   def home
     if logged_in?
+      @message = Message.new
       @micropost = current_user.microposts.build
       @feed_items = current_user.feed.paginate(page: params[:page])
-      @message = Message.new
     end
   end
 
   def new
     if logged_in?
+      @message = Message.new
       @micropost  = current_user.microposts.build
       @feed_items = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).limit(Settings.about.new.num)
     end

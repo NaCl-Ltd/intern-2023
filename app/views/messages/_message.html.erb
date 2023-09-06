@@ -9,5 +9,19 @@
       <span class="timestamp">
         <%= t("Post2") %><%= time_ago_in_words(message.created_at) %><%= t("ago") %>
       </span>
+      <% if current_user.id == message.user.id %>
+        <button class="reply-button">編集</button>
+      <% end %>
+      <div class="form-wrapper" style="display: none;">
+        <%= form_with(model: [message.micropost, message],method: :PUT) do |f| %>
+          <%= f.label :content %>
+          <%= f.text_field :content, class: 'form-control' %>
+          <%= f.submit "りにゃー", class: "btn btn-primary" %>
+        <% end %>
+        <%= link_to "Delete",micropost_message_path(message.micropost,message), data: { "turbo-method": :delete,
+                                               turbo_confirm: "You sure?" } %>
+
+      </div>
   </div>
 </li>
+  
