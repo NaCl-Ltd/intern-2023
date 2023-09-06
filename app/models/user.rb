@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :likes
   has_many :bads
+  has_many :messages
   has_many :microposts, dependent: :destroy
   has_many :like_microposts,through: :likes,source: :micropost
   has_many :bad_microposts,through: :bads, source: :micropost

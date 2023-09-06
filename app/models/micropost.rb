@@ -2,6 +2,7 @@ class Micropost < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :bads, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_many :like_users, through: :likes,source: :user
   has_many :bad_users, through: :bads, source: :bad
   has_many_attached :images do |attachable|
@@ -53,6 +54,11 @@ class Micropost < ApplicationRecord
         end
       end
     end
+  end
+
+  def messages_count
+    @messages = Message.where(micropost_id: id)
+    @messages.count
   end
 end
 

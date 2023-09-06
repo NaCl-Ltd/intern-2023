@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
 
   before_action :set_user, only: %i[home new help about contact]
+  
 
   def home
     if logged_in?
