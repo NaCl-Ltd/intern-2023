@@ -332,3 +332,16 @@ span.image {
   word-wrap: break-word;
   margin-bottom: 10px;
 }
+
+
+/* micropost form */
+.micropost_form {
+  padding: 10px;
+  background-color: #bbb;
+  border-radius: 4px;
+  .field{
+    #micropost_content {
+      border-radius: 4px;
+    }
+  }
+}
