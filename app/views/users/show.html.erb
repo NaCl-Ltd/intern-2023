@@ -16,7 +16,7 @@
     <% if @user.introduction.present? %>
       <p class="introduction"><%= @user.introduction %></p>
     <% end %>
-    
+    <%= link_to "Like", show_likes_path(id: params[:id]),class: 'btn btn-default' %>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
