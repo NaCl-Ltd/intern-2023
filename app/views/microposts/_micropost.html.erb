@@ -17,9 +17,10 @@
       <% else %>
         <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
                                                turbo_confirm: "You sure?" } %>
-      <% end %>
-      <%= link_to "固定する", fixed_micropost_path(micropost), data: { "turbo-method": :get,
+        <%= link_to "固定する", fixed_micropost_path(micropost), data: { "turbo-method": :get,
                                                turbo_confirm: "固定しますか?" } %>
+      <% end %>
+
     <% end %>
     <%= link_to micropost.users_like_count, show_user_micropost_path(micropost) %>
   </span>
