@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <% if current_user.screen_mode %>
-    <body class="<%= current_user.screen_mode ? 'logged-in' : '' %>">
+  <% if current_user && current_user.screen_mode %>
+    <body class="<%= current_user.screen_mode ? 'screen-mode' : '' %>">
   <% else %>
     <body>
   <% end %>
