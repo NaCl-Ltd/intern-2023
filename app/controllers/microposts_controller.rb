@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
 
-  before_action :logged_in_user, only: [:create, :destroy,:deleted_post_index]
+  before_action :logged_in_user, only: [:create, :destroy,:deleted_post_index,:fixed,:unpin ]
   before_action :correct_user,   only: [:destroy, :revive]
 
   def create
@@ -24,7 +24,9 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
+    @micropost.likes.destroy_all
     @micropost.deleted_flag = true
+    @micropost.fixed = false
     if @micropost.save
       flash[:success] = "Micropost deleted"
     else
@@ -61,6 +63,37 @@ class MicropostsController < ApplicationController
     @likes = Like.where(micropost_id: params[:id])
     # @likesの中からuser_idを取得して配列にし、ユニークな値だけを取得して@usersに代入
     @users = User.where(id: @likes.pluck(:user_id).uniq)
+  end
+  
+  def fixed
+    current_user.microposts.update_all(fixed: false)
+    @micropost = current_user.microposts.find_by(id: params[:id])
+    if @micropost && !(@micropost.deleted_flag)
+      @micropost.update(fixed: true)
+      @fixed_item = @micropost
+      flash[:success] = "固定しました"
+      redirect_to request.referer
+    else
+      flash[:error] = "Micropost not found."
+      redirect_to request.referer
+    end
+  end
+  ##固定解除
+  def unpin 
+    @micropost = current_user.microposts.find_by(fixed: true)
+    if @micropost && !(@micropost.deleted_flag)
+      @micropost.update(fixed: false)
+      flash[:success] = "解除しました"
+      redirect_to request.referer
+    else
+      flash[:error] = "Micropost not found."
+      redirect_to request.referer
+    end
+  end
+
+  def bad_user
+    @bads = Bad.where(micropost_id: params[:id])
+    @bad_users = User.where(id: @bads.pluck(:user_id).uniq)
   end
 
 

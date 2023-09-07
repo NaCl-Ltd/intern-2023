@@ -6,6 +6,9 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <h2 style="font-size: 14px; text-align: left; line-height: 0;">
+        &nbsp;<%= "@" + @user.nickname %>
+      </h2>
     </section>    
     <% if @user.birthplace.present? %>
         <p><%= @user.birthplace %></p>
@@ -13,15 +16,22 @@
     <% if @user.introduction.present? %>
       <p class="introduction"><%= @user.introduction %></p>
     <% end %>
-    
+    <%= link_to "Like", show_likes_path(id: params[:id]),class: 'btn btn-default' %>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
+    <% @fixed_item = @microposts.where(fixed: :true)%>
+    <% if @fixed_item.present? %>
+      <h3>固定にゃー </h3>
+      <ol class="microposts">
+        <%= render @fixed_item %>
+      </ol>
+    <% end %>
     <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+    <h3><%= t("Post") %> (<%= @user.microposts.count %>)</h3>
       <ol class="microposts">
         <%= render @microposts %>
       </ol>
