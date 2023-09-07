@@ -50,7 +50,7 @@ class Micropost < ApplicationRecord
 
   def users_bad_count
     @bads = Bad.where(micropost_id: id)
-    @users = Bad.where(id: @bads.pluck(:user_id).uniq)
+    @users = User.where(id: @bads.pluck(:user_id).uniq)
     @users.count
   end
 end
