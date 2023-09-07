@@ -31,7 +31,11 @@
       <%= render 'shared/stats' %>
     </section>
   </aside>
-  <%= link_to t("MicropostFeed"), user_path(id: params[:id]),class: 'btn btn-default', style: 'margin-left: 10px;'%>
+  <%= link_to user_path(id: params[:id]),class: 'btn btn-default' do%>
+    <div style="display: flex; align-items: center; height: 3rem;">
+      <span class="material-symbols-outlined">arrow_back</span><h4><%= t("MicropostFeed") %></h4>
+    </div>
+  <% end %>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
       <% @likes = @user.like_microposts%>

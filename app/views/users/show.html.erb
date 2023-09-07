@@ -2,25 +2,39 @@
 <div class="row">
   <aside class="col-md-4">
     <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-      <h2 style="font-size: 14px; text-align: left; line-height: 0;">
-        &nbsp;<%= "@" + @user.nickname %>
-      </h2>
+      <%= gravatar_for @user %>
+      <div style="display: flex;">
+        <h1>
+          <%= @user.name %>
+        </h1>
+        <h2 style="margin: 1.7px;">
+          @&nbsp;<%= @user.nickname %>
+        </h2>
+      </div>
+      <div class="birth_place">
+        <span class="material-symbols-outlined">
+          location_on
+        </span>
+        <% if @user.birthplace.present? %>
+          <p><%= @user.birthplace %></p>
+        <% end %>
+      </div>
+      <div class="introduction">
+        <% if @user.introduction.present? %>
+          <p><%= @user.introduction %></p>
+        <% end %>
+      <div>
     </section>    
-    <% if @user.birthplace.present? %>
-        <p><%= @user.birthplace %></p>
-    <% end %>
-    <% if @user.introduction.present? %>
-      <p class="introduction"><%= @user.introduction %></p>
-    <% end %>
-    <%= link_to "Like", show_likes_path(id: params[:id]),class: 'btn btn-default' %>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
   </aside>
+  <%= link_to show_likes_path(id: params[:id]),class: 'btn btn-default' do %>
+    <div style="display: flex; align-items: center; height: 3rem;">
+      <h4>Like</h4><span class="material-symbols-outlined">last_page</span>
+    </div>
+  <% end %>
+
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
     <% @fixed_item = @microposts.where(fixed: :true)%>
