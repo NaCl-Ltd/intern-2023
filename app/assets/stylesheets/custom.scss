@@ -219,10 +219,11 @@ input, textarea, select, .uneditable-input {
   margin-bottom: 15px;
   @include box_sizing;
 }
-
+/*
 input {
   height: auto !important;
 }
+*/
 
 #error_explanation {
   color: red;
@@ -364,4 +365,39 @@ span.image {
 /* new */
 .new {
   width: 100%;
+}
+
+/* search */
+.search {
+  width: 100%;
+  .textfield {
+    border-radius: 40rem;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start; /* テキストを左寄せに配置 */
+    align-items: center; /* テキストを垂直中央に配置 */
+    height: 5vh; /* コンテナの高さを画面の高さに合わせる場合 */
+  }
+  .select {
+    display: flex;
+    justify-content: center;
+    label {
+      display: inline-block;
+      justify-self: center;
+      text-align: center;
+      margin-right: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 13rem;
+      margin-bottom: 2rem;
+      input[type="radio"] {
+        background-color: #007acc;
+        color: #fff;
+        border-color: #007acc;
+        width: 80%;
+        min-width: 10rem;
+      }
+    }
+  }
 }
