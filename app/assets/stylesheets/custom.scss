@@ -12,10 +12,14 @@ $gray-medium-light: #eaeaea;
 }
 
 /* universal */
-
 body {
   padding-top: 60px;
+  &.screen-mode {
+    background-color: rgb(35, 35, 35);
+    color: white;
+  }
 }
+
 
 section {
   overflow: auto;
