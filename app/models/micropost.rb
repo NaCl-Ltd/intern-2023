@@ -13,6 +13,7 @@ class Micropost < ApplicationRecord
   validates :content, presence: true, length: { maximum: 140 }
   validate :validate_images
 
+
   
   def is_like(current_user_id)
     @status = Like.find_by(user_id: current_user_id, micropost_id: id).nil?

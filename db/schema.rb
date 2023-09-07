@@ -76,8 +76,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_035532) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "deleted_flag", default: false
     t.boolean "fixed"
+    t.boolean "deleted_flag", default: false
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end

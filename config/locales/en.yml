@@ -82,9 +82,15 @@ en:
   Nickname: "Nickname"
 
 
+
   Micropost to be commented: "Micropost to be commented"
   Edit: "Edit"
   Delete: "Delete"
 
   re-nya-n: "re-nya-n"
   comment: "comment"
+
+  Likes-ranking: "LikeRanking"
+  Fix: "fix"
+  Unpin: "Unpin"
+

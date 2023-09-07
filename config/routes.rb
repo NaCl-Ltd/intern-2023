@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy]  do
     resources :messages,           only: [:index, :new, :edit, :create, :update, :destroy]
     member do
-      get :show_user
+      get :show_user, :bad_user, :fixed, :unpin
       get :bad_user
       post :revive
     end
@@ -35,4 +35,5 @@ Rails.application.routes.draw do
   get '/microposts', to: 'static_pages#home'
   get '/deleted_microposts', to: 'microposts#deleted_post_index'
   get "/new", to: "static_pages#new"
+  get "/ranking", to: "static_pages#ranking"
 end
