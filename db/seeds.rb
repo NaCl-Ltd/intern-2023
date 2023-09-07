@@ -6,6 +6,7 @@ User.create!(name:  "Example User",
   password_confirmation: "foobar",
   admin:     true,
   activated: true,
+  screen_mode: false,
   activated_at: Time.zone.now)
 
 # 追加のユーザーをまとめて生成する
@@ -20,6 +21,7 @@ User.create!(name:  name,
     password:              password,
     password_confirmation: password,
     activated: true,
+    screen_mode: false,
     activated_at: Time.zone.now)
 end
 
