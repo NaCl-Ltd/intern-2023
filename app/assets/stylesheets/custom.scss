@@ -223,10 +223,11 @@ input, textarea, select, .uneditable-input {
   margin-bottom: 15px;
   @include box_sizing;
 }
-
+/*
 input {
   height: auto !important;
 }
+*/
 
 #error_explanation {
   color: red;
@@ -281,6 +282,7 @@ input {
 /* microposts */
 
 .microposts {
+  margin: 0 auto;
   list-style: none;
   padding: 0;
   li {
@@ -311,6 +313,20 @@ input {
     margin-right: 10px;
     margin-top: 5px;
   }
+  .reaction-group {
+    display: flex;
+    :first-child {
+      margin-right: 12px;
+    }
+    .reaction {
+      display: flex;
+      flex-direction: column;
+      width: 50px;
+      .count {
+        margin: 0 auto;
+      }
+    }
+  }
 }
 
 aside {
@@ -322,8 +338,14 @@ aside {
 
 span.image {
   margin-top: 10px;
+  image {
+    display: block;
+    margin-bottom: 10px;
+  }
   input {
-    border: 0;
+    height: 50px;
+    cursor: pointer;
+    margin-top: 10px;
   }
 }
 
@@ -335,4 +357,73 @@ span.image {
   width:20em;
   word-wrap: break-word;
   margin-bottom: 10px;
+}
+
+
+/* micropost form */
+.micropost_form {
+  padding: 10px;
+  background-color: #bbb;
+  border-radius: 4px;
+  .field{
+    #micropost_content {
+      border-radius: 4px;
+    }
+  }
+}
+
+/* new */
+.new {
+  width: 100%;
+}
+
+/* search */
+.search {
+  width: 100%;
+  .textfield {
+    border-radius: 40rem;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start; /* テキストを左寄せに配置 */
+    align-items: center; /* テキストを垂直中央に配置 */
+    height: 5vh; /* コンテナの高さを画面の高さに合わせる場合 */
+  }
+  .select {
+    display: flex;
+    justify-content: center;
+    label {
+      display: inline-block;
+      justify-self: center;
+      text-align: center;
+      margin-right: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 13rem;
+      margin-bottom: 2rem;
+      input[type="radio"] {
+        background-color: #007acc;
+        color: #fff;
+        border-color: #007acc;
+        width: 80%;
+        min-width: 10rem;
+      }
+    }
+  }
+}
+
+/* user_profiles */
+.birth_place {
+  float: left;
+  text-align: center;
+  display: flex;
+  margin-top: 0.7rem;
+}
+
+.introduction {
+  float: left;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  margin-top: 0.7rem;
 }

@@ -1,22 +1,21 @@
 <% provide(:title, 'Users') %>
-
+<main class="search">
 <h1><%= t("AllUsers") %></h1>
-<%= will_paginate %>
 
 <%= form_with url: search_path, method: :post do |form| %>
-<%= form.label :query, t("Search") %>
-<%= form.text_field :data %>
+<div class="select">
 <label>
-<%= t("Usersearch") %>
-<%= form.radio_button :select,"ユーザー検索" ,:checked => true %>
+  <%= t("Usersearch") %>
+  <%= form.radio_button :select,"ユーザー検索" ,:checked => true %>
 </label>
 <label>
-<%= t("Keywordsearch")%>
-<%= form.radio_button :select,"キーワード検索" %>
+  <%= t("Keywordsearch")%>
+  <%= form.radio_button :select,"キーワード検索" %>
 </label>
-<%= form.submit t("Search") %>
+</div>
+<%= form.text_field :data, class: "textfield", placeholder: "🔍"+t("Search") %>
 <% end %>
-
+<%= will_paginate %>
 <ul class="users">
   <% if @users.present?%>
     <%= render @users%>
@@ -25,3 +24,4 @@
   <% end%>
 </ul>
 <%= will_paginate %>
+</main>

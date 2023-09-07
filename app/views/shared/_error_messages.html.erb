@@ -8,5 +8,6 @@
       <li><%= msg %></li>
     <% end %>
     </ul>
-  </div>
+  </div> 
+    <%@fixed_item = current_user.microposts.where(fixed: :true)%>
 <% end %>
