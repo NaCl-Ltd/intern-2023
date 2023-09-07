@@ -1,3 +1,6 @@
 <% @likes.each do |like_post|%>
+    <% if !(like_post.deleted_flag)%>
     <%= render partial: 'microposts/micropost',locals: {micropost: like_post} %>
+    <% end %>
+
 <% end %>
