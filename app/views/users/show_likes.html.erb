@@ -2,25 +2,40 @@
 <div class="row">
   <aside class="col-md-4">
     <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-      <h2 style="font-size: 14px; text-align: left; line-height: 0;">
-        &nbsp;<%= "@" + @user.nickname %>
-      </h2>
-    </section>    
-    <% if @user.birthplace.present? %>
-        <p><%= @user.birthplace %></p>
-    <% end %>
-    <% if @user.introduction.present? %>
-      <p class="introduction"><%= @user.introduction %></p>
-    <% end %>
-    <%= link_to t("MicropostFeed"), user_path(id: params[:id]),class: 'btn btn-default'  %>
+      <%= gravatar_for @user %>
+      <div style="display: flex;">
+        <h1>
+          <%= @user.name %>
+        </h1>
+        <h2 style="margin: 1.7px;">
+          @&nbsp;<%= @user.nickname %>
+        </h2>
+      </div>      
+      <div class="birth_place">
+        <% if @user.birthplace.present? %>
+          <span class="material-symbols-outlined">
+            location_on
+          </span>
+          <p style="margin: auto 0;">
+            <%= @user.birthplace %>
+          </p>
+        <% end %>
+      </div>
+      <div class="introduction">
+        <% if @user.introduction.present? %>
+          <p><%= @user.introduction %></p>
+        <% end %>
+      </div>
+    </section>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
   </aside>
+  <%= link_to user_path(id: params[:id]),class: 'btn btn-default' do%>
+    <div style="display: flex; align-items: center; height: 3rem;">
+      <span class="material-symbols-outlined">arrow_back</span><h4><%= t("MicropostFeed") %></h4>
+    </div>
+  <% end %>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
       <% @likes = @user.like_microposts%>

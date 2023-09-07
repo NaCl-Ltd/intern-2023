@@ -23,7 +23,7 @@ class User < ApplicationRecord
                     uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  validates_length_of :birthplace, maximum: 10
+  validates_length_of :birthplace, maximum: 30
   validates_length_of :introduction, maximum: 100
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -97,7 +97,7 @@ class User < ApplicationRecord
     Micropost.where("user_id IN (#{following_ids})
                      OR user_id = :user_id
                      AND deleted_flag = false", user_id: id)
-             .includes(:user, image_attachment: :blob)
+             .includes(:user, images_attachments: :blob)
   end
 
   # ユーザーをフォローする
