@@ -22,10 +22,9 @@ Rails.application.routes.draw do
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy]  do
-    member do
-      get :show_user
-      get :bad_user
+  resources :microposts,          only: [:create, :destroy] do 
+    member do 
+      get :show_user, :bad_user, :fixed, :unpin
       post :revive
     end
   end
@@ -34,4 +33,5 @@ Rails.application.routes.draw do
   get '/microposts', to: 'static_pages#home'
   get '/deleted_microposts', to: 'microposts#deleted_post_index'
   get "/new", to: "static_pages#new"
+  get "/ranking", to: "static_pages#ranking"
 end
