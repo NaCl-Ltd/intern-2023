@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-8">
+        <h3><%= t("Micropost to be commented") %></h3>
+        <ol class="microposts">
+            <%= render @message.micropost %>
+        </ol>
+    </div>
+    <div class="col-md-8">
+        <%= form_with(model: [@message.micropost, @message], method: :PUT, local: true) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.label t("edit") %>
+        <div class = "field">
+            <%= f.text_field :content, class: 'form-control' %>
+        </div>
+        <%= f.submit t("re-nya-n"), class: "btn btn-primary" %>
+    <% end %>
+    </div>
+</div>  

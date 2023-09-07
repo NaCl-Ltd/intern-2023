@@ -54,7 +54,6 @@ class MicropostsController < ApplicationController
 
   def deleted_post_index
     @microposts = current_user.microposts.where(deleted_flag: true)
-    @message = Message.new
   end
   
   def show_user

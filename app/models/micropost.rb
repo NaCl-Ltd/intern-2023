@@ -60,5 +60,9 @@ class Micropost < ApplicationRecord
     @messages = Message.where(micropost_id: id)
     @messages.count
   end
+
+  def set_message
+    @message = Message.new
+  end
 end
 

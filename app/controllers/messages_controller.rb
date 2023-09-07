@@ -1,5 +1,14 @@
 class MessagesController < ApplicationController
-  before_action :set_user, only: %i[index]
+  before_action :set_user, only: %i[index new edit]
+
+  def new
+    @micropost = Micropost.find(params[:micropost_id])
+    @message = Message.new
+  end
+
+  def edit
+    @message = Message.find(params[:id])
+  end
 
 
   def index
@@ -10,19 +19,24 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(user_id:current_user.id, micropost_id:params[:micropost_id], content: params[:message][:content])
-    
     if @message.save
-      flash[:success] = "message created!"
+      flash[:info] = "message created!"
+      redirect_to micropost_messages_path(@message.micropost)
+    else
+      @micropost = @message.micropost
+      render 'new', status: :unprocessable_entity
     end
-    redirect_to request.referrer
   end
 
   def update
     @message = Message.find(params[:id])
     if @message.update(content: params[:message][:content])
-      flash[:success] = "message updated!"
+      flash[:info] = "message updated!"
+      redirect_to micropost_messages_path(@message.micropost)
+    else
+      @micropost = @message.micropost
+      render 'edit', status: :unprocessable_entity
     end
-    redirect_to request.referrer
   end
 
   def destroy
