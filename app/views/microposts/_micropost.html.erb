@@ -39,17 +39,17 @@
   <div class="reaction-group">
     <span class="reaction">
       <% if micropost.is_like(current_user.id) %>
-        <%= link_to image_tag('unlike.jpg', size: "50x50"), likes_create_path(id: micropost.id) %>
+        <%= link_to image_tag('unlike.PNG', size: "50x50"), likes_create_path(id: micropost.id) %>
       <% else %>
-        <%= link_to image_tag('like.jpg', size: "50x50"), likes_delete_path(id: micropost.id) %>
+        <%= link_to image_tag('like.PNG', size: "50x50"), likes_delete_path(id: micropost.id) %>
       <% end %>
       <%= link_to micropost.users_like_count, show_user_micropost_path(micropost), class: "count" %>
     </span>
     <span class="reaction">
       <% if micropost.is_bad(current_user.id) %>
-        <%= link_to image_tag('not_bad_fish.jpg', size: "50x50"), bads_create_path(id: micropost.id) %>
+        <%= link_to image_tag('not_bad_fish.PNG', size: "50x50"), bads_create_path(id: micropost.id) %>
       <% else %>
-        <%= link_to image_tag('bad_fish.jpg', size: "50x50"), bads_destroy_path(id: micropost.id) %>
+        <%= link_to image_tag('bad_fish.PNG', size: "50x50"), bads_destroy_path(id: micropost.id) %>
       <% end %>
       <%= link_to micropost.users_bad_count, bad_user_micropost_path(micropost), class: "count" %>
     </span>

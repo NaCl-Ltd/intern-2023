@@ -65,5 +65,11 @@ class Micropost < ApplicationRecord
   def set_message
     @message = Message.new
   end
+  
+  def users_bad_count
+    @bads = Bad.where(micropost_id: id)
+    @users = User.where(id: @bads.pluck(:user_id).uniq)
+    @users.count
+  end
 end
 

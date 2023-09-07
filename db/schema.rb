@@ -13,7 +13,6 @@
 ActiveRecord::Schema[7.0].define(version: 2023_09_06_035532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -108,6 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_035532) do
     t.text "introduction"
     t.text "birthplace"
     t.string "nickname"
+    t.boolean "screen_mode"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
