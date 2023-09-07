@@ -18,7 +18,15 @@
       <% else %>
         <%= link_to t("DeletePost"), micropost, data: { "turbo-method": :delete,
                                                turbo_confirm: "You sure?" } %>
+        <% if micropost.fixed%>
+          <%= link_to t("Unpin"), unpin_micropost_path(micropost), data: { "turbo-method": :get,
+                                                turbo_confirm: "You sure?" } %>
+        <% else%>
+          <%= link_to t("Fix"), fixed_micropost_path(micropost), data: { "turbo-method": :get,
+                                                turbo_confirm: "You sure?" } %>
+        <% end %>
       <% end %>
+
     <% end %>
     <%= link_to micropost.users_like_count, show_user_micropost_path(micropost) %>
     <%= link_to micropost.users_bad_count, bad_user_micropost_path(micropost) %>
