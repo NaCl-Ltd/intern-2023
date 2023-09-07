@@ -1,10 +1,19 @@
 class MicropostsController < ApplicationController
+
   before_action :logged_in_user, only: [:create, :destroy,:deleted_post_index,:fixed,:unpin ]
   before_action :correct_user,   only: [:destroy, :revive]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
-    @micropost.image.attach(params[:micropost][:image])
+    
+    # 画像が複数添付されている場合の処理
+    # if params[:micropost][:images].present?
+    #   p params[:micropost][:images].count
+    #   params[:micropost][:images].each do |image|
+    #     @micropost.images.attach(image)
+    #   end
+    # end
+  
     if @micropost.save
       flash[:success] = "Micropost created!"
       redirect_to root_url
@@ -91,7 +100,7 @@ class MicropostsController < ApplicationController
   private
 
   def micropost_params
-    params.require(:micropost).permit(:content, :image)
+    params.require(:micropost).permit(:content,images:[])
   end
 
   def correct_user
