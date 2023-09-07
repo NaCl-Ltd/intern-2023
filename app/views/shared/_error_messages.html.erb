@@ -9,4 +9,5 @@
     <% end %>
     </ul>
   </div> 
+    <%@fixed_item = current_user.microposts.where(fixed: :true)%>
 <% end %>
