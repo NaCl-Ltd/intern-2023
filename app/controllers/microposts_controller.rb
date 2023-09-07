@@ -2,6 +2,7 @@ class MicropostsController < ApplicationController
 
   before_action :logged_in_user, only: [:create, :destroy,:deleted_post_index,:fixed,:unpin ]
   before_action :correct_user,   only: [:destroy, :revive]
+  before_action :set_user, only: %i[deleted_post_index show_user bad_user]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -114,6 +115,14 @@ class MicropostsController < ApplicationController
 
   def is_like
     @status = Like.find_by(user_id: current_user.id, micropost_id: params[:micropost_id]).nil?
+  end
+
+  def set_user
+    if current_user
+      @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).count
+      @new_micropost = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).limit(Settings.about.new.num)
+      @new_microposts_count = @new_micropost.count
+    end
   end
 
 end
