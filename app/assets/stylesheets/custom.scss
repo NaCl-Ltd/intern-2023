@@ -334,8 +334,14 @@ aside {
 
 span.image {
   margin-top: 10px;
+  image {
+    display: block;
+    margin-bottom: 10px;
+  }
   input {
-    border: 0;
+    height: 50px;
+    cursor: pointer;
+    margin-top: 10px;
   }
 }
 
@@ -400,4 +406,25 @@ span.image {
       }
     }
   }
+}
+
+/* user_profiles */
+.birth_place {
+  float: left;
+  text-align: center;
+  display: flex;
+  margin-top: 0.7rem;
+}
+
+.introduction {
+  float: left;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  margin-top: 0.7rem;
+}
+
+.divider {
+  border-bottom: 1px solid rgb(232, 232, 232);
+  padding: 15px 0;
 }
