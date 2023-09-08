@@ -80,10 +80,21 @@ en:
   Usersearch: User search
   Keywordsearch: "Keyword search"
   Nickname: "Nickname"
+
+
+
+  Micropost to be commented: "Micropost to be commented"
+  Edit: "Edit"
+  Delete: "Delete"
+
+  re-nya-n: "re-nya-n"
+  comment: "comment"
+
   Likes-ranking: "LikeRanking"
   Fix: "🔒fix"
   Unpin: "🔓Unpin"
   Screen_Mode: "Dark mode"
+  reply: "reply💬"
   AttachImages: "Attach Images"
   FixedMicropost: "Fixed Micropost"
   Likes: "Likes"

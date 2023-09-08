@@ -1,0 +1,19 @@
+<li id="message-<%= message.id %>">
+  <div class="contents">
+    <%= link_to gravatar_for(message.user, size: 50), message.user %>
+      <span class="user"><%= link_to message.user.name, message.user %></span>
+      <%= link_to "@#{message.user.nickname}", message.user, class: "user" %>
+      <span class="content">
+        <%= linkify_urls(message.content) %>
+      </span>
+      <span class="timestamp">
+        <%= t("Post2") %><%= time_ago_in_words(message.created_at) %><%= t("ago") %>
+        <% if current_user.id == message.user.id %>
+          <%= link_to t("Edit"),edit_micropost_message_path(message.micropost,message) %>
+          <%= link_to t("Delete"), micropost_message_path(message.micropost,message), data: { "turbo-method": :delete,
+                                               turbo_confirm: "You sure?" } %>
+        <% end %>
+      </span>
+  </div>
+</li>
+  

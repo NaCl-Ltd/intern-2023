@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :likes
   has_many :bads
+  has_many :messages
   has_many :microposts, dependent: :destroy
   has_many :like_microposts,through: :likes,source: :micropost
   has_many :bad_microposts,through: :bads, source: :micropost
@@ -95,6 +96,7 @@ class User < ApplicationRecord
     following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
+
                      OR user_id = :user_id
                      AND deleted_flag = false", user_id: id)
              .includes(:user, images_attachments: :blob)

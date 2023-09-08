@@ -1,9 +1,11 @@
 class StaticPagesController < ApplicationController
 
+
   before_action :set_user, only: %i[home new ranking help about contact]
 
   def home
     if logged_in?
+      @message = Message.new
       @micropost = current_user.microposts.build
       @feed_items = current_user.feed.paginate(page: params[:page])
       @fixed_item = current_user.microposts.where(fixed: :true)
@@ -12,6 +14,7 @@ class StaticPagesController < ApplicationController
 
   def new
     if logged_in?
+      @message = Message.new
       @micropost  = current_user.microposts.build
       @feed_items = current_user.feed.where("created_at >= ?", Settings.about.new.time.hours.ago).limit(Settings.about.new.num)
     end

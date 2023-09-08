@@ -2,6 +2,7 @@ class Micropost < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :bads, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_many :like_users, through: :likes,source: :user
   has_many :bad_users, through: :bads, source: :bad
   has_many_attached :images do |attachable|
@@ -11,6 +12,29 @@ class Micropost < ApplicationRecord
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
   validate :validate_images
+
+
+  
+  def is_like(current_user_id)
+    @status = Like.find_by(user_id: current_user_id, micropost_id: id).nil?
+  end
+
+  def is_bad(current_user_id)
+    @status = Bad.find_by(user_id: current_user_id, micropost_id: id).nil?
+  end
+
+  def users_like_count
+    @likes = Like.where(micropost_id: id)
+    # @likesの中からuser_idを取得して配列にし、ユニークな値だけを取得して@usersに代入
+    @users = User.where(id: @likes.pluck(:user_id).uniq)
+    @users.count
+  end
+
+  def users_bad_count
+    @bads = Bad.where(micropost_id: id)
+    @users = Bad.where(id: @bads.pluck(:user_id).uniq)
+    @users.count
+  end
   
   # 最大4つの画像を添付できるようにする
   MAX_IMAGES = 4
@@ -33,21 +57,15 @@ class Micropost < ApplicationRecord
     end
   end
 
-  def is_like(current_user_id)
-    @status = Like.find_by(user_id: current_user_id, micropost_id: id).nil?
+  def messages_count
+    @messages = Message.where(micropost_id: id)
+    @messages.count
   end
 
-  def is_bad(current_user_id)
-    @status = Bad.find_by(user_id: current_user_id, micropost_id: id).nil?
+  def set_message
+    @message = Message.new
   end
-
-  def users_like_count
-    @likes = Like.where(micropost_id: id)
-    # @likesの中からuser_idを取得して配列にし、ユニークな値だけを取得して@usersに代入
-    @users = User.where(id: @likes.pluck(:user_id).uniq)
-    @users.count
-  end
-
+  
   def users_bad_count
     @bads = Bad.where(micropost_id: id)
     @users = User.where(id: @bads.pluck(:user_id).uniq)
