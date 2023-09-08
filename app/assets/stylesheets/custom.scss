@@ -382,11 +382,12 @@ span.image {
     display: flex;
     justify-content: flex-start; /* テキストを左寄せに配置 */
     align-items: center; /* テキストを垂直中央に配置 */
-    height: 5vh; /* コンテナの高さを画面の高さに合わせる場合 */
+    height: 4.5vh; /* コンテナの高さを画面の高さに合わせる場合 */
   }
   .select {
     display: flex;
     justify-content: center;
+    float: left;
     label {
       display: inline-block;
       justify-self: center;
@@ -399,10 +400,11 @@ span.image {
       margin-bottom: 2rem;
       input[type="radio"] {
         background-color: #007acc;
+        display:flex;
         color: #fff;
         border-color: #007acc;
         width: 80%;
-        min-width: 10rem;
+        min-width: 11rem;
       }
     }
   }
