@@ -1,5 +1,5 @@
 <% provide(:title, "Like Ranking") %>
-<h1><%= t("Likes Ranking") %></h1>
+<h1><%= t("Likes-ranking") %></h1>
 <div class="row">
   <div class="col-md-8">
     <% @sorted_likes = Like.group(:micropost_id).count.sort_by { |_, count| -count } %>
