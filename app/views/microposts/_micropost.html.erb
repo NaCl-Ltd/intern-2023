@@ -30,7 +30,7 @@
       <% end %>
 
     <% end %>
-    <%= link_to "返信💬",new_micropost_message_path(micropost) %>
+    <%= link_to t("reply"),new_micropost_message_path(micropost) %>
     <%= link_to "(#{micropost.messages_count})", micropost_messages_path(micropost) %>
   </span>
   </div>
