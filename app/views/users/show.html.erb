@@ -31,7 +31,7 @@
   </aside>
   <%= link_to show_likes_path(id: params[:id]),class: 'btn btn-default' do %>
     <div style="display: flex; align-items: center; height: 3rem;">
-      <h4>Like</h4><span class="material-symbols-outlined">last_page</span>
+      <h4><%= t("Likes") %></h4><span class="material-symbols-outlined">last_page</span>
     </div>
   <% end %>
 
@@ -39,7 +39,7 @@
     <%= render 'follow_form' if logged_in? %>
     <% @fixed_item = @microposts.where(fixed: :true)%>
     <% if @fixed_item.present? %>
-      <h3>固定にゃー </h3>
+      <h3><%= t("FixedMicropost") %> </h3>
       <ol class="microposts">
         <%= render @fixed_item %>
       </ol>
