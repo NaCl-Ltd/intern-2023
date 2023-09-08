@@ -40,9 +40,11 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    Message.find(params[:id]).destroy
-    flash[:success] = "Message deleted"
-    redirect_to request.referrer
+    @message = Message.find(params[:id])
+    if @message.destroy
+      flash[:success] = "Message deleted"
+    end
+    redirect_to request.referrer, status: :see_other
   end
 
   private
