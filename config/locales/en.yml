@@ -81,7 +81,9 @@ en:
   Keywordsearch: "Keyword search"
   Nickname: "Nickname"
   Likes-ranking: "LikeRanking"
-  Fix: "fix"
-  Unpin: "Unpin"
+  Fix: "🔒fix"
+  Unpin: "🔓Unpin"
   Screen_Mode: "Dark mode"
-
+  AttachImages: "Attach Images"
+  FixedMicropost: "Fixed Micropost"
+  Likes: "Likes"
