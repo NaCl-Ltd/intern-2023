@@ -40,7 +40,7 @@
     <%= render 'follow_form' if logged_in? %>
       <% @likes = @user.like_microposts%>
     <% if @user.microposts.any? %>
-      <h3>Likes(<%= @likes.count %>)</h3>
+      <h3><%= t("Likes") %>(<%= @likes.count %>)</h3>
       <ol class="microposts">
         <%= render 'likes' %>
       </ol>
